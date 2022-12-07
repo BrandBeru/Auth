@@ -65,14 +65,9 @@ public abstract class Role {
     }
     public abstract String getRole();
 
-    String listPrivileges(){
-        String s = "";
-        Iterator it = privilegesMap.keySet().iterator();
-        while (it.hasNext()){
-            Object key = it.next();
-            s += "Privilege: " + key + " - " + privilegesMap.get(key) + "\n";
-        }
-        return s;
+    public Map<String, Boolean> listPrivileges(){
+        System.out.println("Write: "+privilegesMap.get("write") + " - Delete: " + privilegesMap.get("delete"));
+        return privilegesMap;
     }
 
     public Role(String name, String lastName, String email, String address, String phoneNumber, String password) {

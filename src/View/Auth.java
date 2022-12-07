@@ -21,11 +21,15 @@ public class Auth extends JFrame{
     private JTextField rTxtAddress;
     private JTextField rTxtPhone;
     private JComboBox cmbRole;
+    private JComboBox vCmbRole;
 
     public Auth() {
-        cmbRole.addItem(Roles.INVITED);
         cmbRole.addItem(Roles.ADMINISTRATOR);
         cmbRole.addItem(Roles.USER);
+
+        vCmbRole.addItem(Roles.INVITED);
+        vCmbRole.addItem(Roles.ADMINISTRATOR);
+        vCmbRole.addItem(Roles.USER);
 
         char[] pass = {'g','i','o','v','a','n','n','y'};
         new RegisterController().addRegister("juan", "", "juan@gmail.com","adfdsf","242314234",Roles.USER,pass);
@@ -44,7 +48,6 @@ public class Auth extends JFrame{
                 if(ValidateEmpty.validate(role.toString(), rName, "", rEmail, passCount, rAddress, rPhone)) {
                     JOptionPane.showMessageDialog(registerButton, "All right!");
                     new RegisterController().addRegister(rName, "", rEmail,rAddress,rPhone,role,rTxtPassword.getPassword());
-
                 }
                 else
                     JOptionPane.showMessageDialog(registerButton, "There's some Empty objects");
@@ -53,8 +56,8 @@ public class Auth extends JFrame{
         validateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(LoginController.validateRegister(cmbRole.getSelectedItem().toString(), txtEmail.getText(), vTxtPass.getPassword())){
-                    new Principal();
+                if(LoginController.validateRegister(vCmbRole.getSelectedItem().toString(), txtEmail.getText(), vTxtPass.getPassword())){
+                    new Principal().initComponents();
                     Auth.super.dispose();
                 }
             }

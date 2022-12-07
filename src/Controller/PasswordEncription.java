@@ -22,8 +22,8 @@ public class PasswordEncription {
                 s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
 
-            System.out.println("User password: "+pass);
-            System.out.println("Encrypted password: " + s.toString());
+            System.out.println("User password by now!: "+pass);
+            System.out.println("Encrypted password to admin: " + s.toString());
 
             return s.toString();
         }catch(NoSuchAlgorithmException e){

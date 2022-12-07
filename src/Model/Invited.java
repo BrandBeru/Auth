@@ -8,11 +8,14 @@ public class Invited extends Role implements Privileges{
     }
     @Override
     public String toString() {
-        return "Invited{}";
+        return "Invited{"+getName() + "}" + "Role{"+getRole()+"}";
     }
 
     public Invited(String name, String lastName, String email, String address, String phoneNumber, String password) {
         super(name, lastName, email, address, phoneNumber, password);
+    }
+    public Invited(String name){
+        setName(name);
     }
     public Invited(Role role){
         this.setName(role.getName());
