@@ -134,6 +134,7 @@
             </constraints>
             <properties>
               <icon value="View/Icons/Beru.png"/>
+              <opaque value="false"/>
               <text value=""/>
             </properties>
           </component>

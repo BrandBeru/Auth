@@ -17,7 +17,24 @@ public class Datas {
     public static void addRole(Role addd_role){
         roleMap.put(addd_role.getRole(), addd_role);
     }
-    public static boolean getRole(String role, String name, char[] pass){
+    public static Map<String, Role> getRoleMap(){
+        return roleMap;
+    }
+    public static Role addRole(String type){
+        if(type.equals(Roles.ADMINISTRATOR.name())) {
+            adminSession = new Administrator();
+            adminSession.grantPrivileges();
+            roleMap.put(type, adminSession);
+            return adminSession;
+        }else if(type.equals(Roles.USER.name())){
+            userSession = new User();
+            userSession.grantPrivileges();
+            roleMap.put(type, userSession);
+            return userSession;
+        }else
+            return null;
+    }
+    public static Role getRole(String role, String name, char[] pass){
         if(!role.equals(Roles.INVITED.name())){
             Iterator it = roleMap.keySet().iterator();
             while(it.hasNext()){
@@ -25,8 +42,7 @@ public class Datas {
                 Role actualRol = roleMap.get(key);
                 if(actualRol.getRole().equals(role)) {
                     if(PasswordEncription.validatePassword(actualRol.getPassword(), pass) && actualRol.getName().equals(name)) {
-                        setActiveSession(role, actualRol);
-                        return true;
+                        return setActiveSession(role, actualRol);
                     }
                 }else
                     System.out.println("User is validating");
@@ -35,21 +51,24 @@ public class Datas {
             invitedSession = new Invited(name);
             invitedSession.grantPrivileges();
             JOptionPane.showMessageDialog(null, invitedSession.toString());
-            return true;
+            return invitedSession;
         }
-        return false;
+        return null;
     }
-    public static void setActiveSession(String roleType, Role role){
+    public static Role setActiveSession(String roleType, Role role){
         if(roleType.equals(Roles.ADMINISTRATOR.name())) {
             adminSession = new Administrator(role);
             adminSession.grantPrivileges();
             JOptionPane.showMessageDialog(null, adminSession.toString());
+            return adminSession;
         }
         else if(roleType.equals(Roles.USER.name())) {
             userSession = new User(role);
             userSession.grantPrivileges();
             JOptionPane.showMessageDialog(null, userSession.toString());
+            return userSession;
         }
+        return null;
     }
     public static Role getActiveRole(){
         if(adminSession!=null)

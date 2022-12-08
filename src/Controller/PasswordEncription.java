@@ -19,11 +19,11 @@ public class PasswordEncription {
 
             StringBuilder s = new StringBuilder();
             for (int i = 0; i < bytes.length; i++){
-                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+                s.append(Integer.toString((bytes[i] & 0xff) + 0x00012, 32).substring(1));
             }
 
-            System.out.println("User password by now!: "+pass);
-            System.out.println("Encrypted password to admin: " + s.toString());
+            System.out.println("Contraseña que no puede ver el hacker: "+pass);
+            System.out.println("Contraseña que puede ver el hacker: " + s.toString());
 
             return s.toString();
         }catch(NoSuchAlgorithmException e){
@@ -49,7 +49,7 @@ public class PasswordEncription {
 
             StringBuilder s = new StringBuilder();
             for (int i = 0; i < bytes.length; i++){
-                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+                s.append(Integer.toString((bytes[i] & 0xff) + 0x00012, 32).substring(1));
             }
 
             return s.toString();

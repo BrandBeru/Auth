@@ -6,8 +6,10 @@ import Values.Datas;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.xml.crypto.Data;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class Principal extends JFrame{
     private JPanel mainPanel;
@@ -29,10 +31,16 @@ public class Principal extends JFrame{
     private JCheckBox cbxwrite;
     private JCheckBox cbxdelete;
 
+    private File path = new File("~/");
+
     public Principal() {
         write(Datas.getActiveRole().listPrivileges().get("write"));
         read(Datas.getActiveRole().listPrivileges().get("read"));
         delete(Datas.getActiveRole().listPrivileges().get("delete"));
+
+        System.out.println("Contraseña que quiere ver el hacker: "+Datas.getActiveRole().getPassword());
+
+        lblImage.setAutoscrolls(true);
 
         new SetDatas().SetLabels(lblUser, lblEmail, lblAdd, lblPhone, lblRole);
         btnedit.addActionListener(new ActionListener() {
@@ -71,10 +79,11 @@ public class Principal extends JFrame{
         changeImageButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                JFileChooser fileChooser = new JFileChooser("~/");
+                JFileChooser fileChooser = new JFileChooser(path);
                 int r = fileChooser.showOpenDialog(null);
                 if(r == JFileChooser.APPROVE_OPTION){
                     lblImage.setIcon(new ImageIcon(fileChooser.getSelectedFile().getAbsolutePath()));
+                    path = new File(fileChooser.getSelectedFile().getPath());
                 }
             }
         });

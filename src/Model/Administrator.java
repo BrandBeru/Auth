@@ -23,6 +23,9 @@ public class Administrator extends Role implements Privileges{
         this.setPhoneNumber(role.getPhoneNumber());
         this.setLastName(role.getLastName());
     }
+    public Administrator(){
+
+    }
 
     @Override
     public void grantPrivileges() {

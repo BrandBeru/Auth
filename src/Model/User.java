@@ -14,6 +14,9 @@ public class User extends Role implements Privileges{
     public User(String name, String lastName, String email, String address, String phoneNumber, String password) {
         super(name, lastName, email, address, phoneNumber, password);
     }
+    public User(){
+
+    }
 
     @Override
     public void grantPrivileges() {

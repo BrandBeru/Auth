@@ -3,7 +3,9 @@ package View;
 import Controller.LoginController;
 import Controller.RegisterController;
 import Controller.ValidateEmpty;
+import Model.Querys;
 import Model.Roles;
+import Values.Cache;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -31,10 +33,8 @@ public class Auth extends JFrame{
         vCmbRole.addItem(Roles.ADMINISTRATOR);
         vCmbRole.addItem(Roles.USER);
 
-        char[] pass = {'g','i','o','v','a','n','n','y'};
-        new RegisterController().addRegister("juan", "", "juan@gmail.com","adfdsf","242314234",Roles.USER,pass);
-        char[] pass2 = {'g','i','o','v','a','n','n','t'};
-        new RegisterController().addRegister("estevan", "", "estevan@gmail.com","adfdsf","3356345",Roles.ADMINISTRATOR,pass2);
+        Cache.createCache();
+
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -59,6 +59,7 @@ public class Auth extends JFrame{
                 if(LoginController.validateRegister(vCmbRole.getSelectedItem().toString(), txtEmail.getText(), vTxtPass.getPassword())){
                     new Principal().initComponents();
                     Auth.super.dispose();
+                    Cache.readCache();
                 }
             }
         });
